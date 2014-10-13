@@ -4,11 +4,10 @@
     android:layout_height="wrap_content" >
     <com.parse.ParseImageView
         android:id="@+id/icon"
-        android:layout_width="380dp"
-        android:layout_height="300dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/type"
@@ -17,8 +16,8 @@
         android:textColor="#ff3d3d3d"
         android:textSize="32sp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="300dp" />
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="160dp" />
 
     <TextView
         android:id="@+id/name"
@@ -26,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingTop="350dp" />
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="190dp" />
 
     !</RelativeLayout>

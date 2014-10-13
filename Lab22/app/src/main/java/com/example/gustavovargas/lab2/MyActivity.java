@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.content.Intent;
+import android.view.View;
+
 
 import com.parse.Parse;
 
@@ -50,5 +55,11 @@ public class MyActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void agregarComida(View view){
+        Intent intent = new Intent(this, AgregarComida.class);
+        startActivity(intent);
     }
 }
