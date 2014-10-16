@@ -20,8 +20,13 @@
             android:name=".AgregarComida"
             android:label="@string/title_activity_agregar_comida" >
         </activity>
+        <activity
+            android:name=".VerProductos"
+            android:label="@string/title_activity_ver_productos" >
+        </activity>
     </application>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 

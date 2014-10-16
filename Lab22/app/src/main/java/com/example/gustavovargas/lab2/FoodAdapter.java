@@ -2,8 +2,16 @@ package com.example.gustavovargas.lab2;
 
 import android.content.Context;
 import com.parse.*;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.*;
+import android.widget.ImageView;
 import android.widget.TextView;
+import java.io.ByteArrayOutputStream;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import android.view.View;
 
 /**
  * Created by gustavovargas on 06/10/14.
@@ -37,6 +45,27 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         TextView typeView = (TextView) v.findViewById(R.id.type);
         typeView.setText(object.getString("Type"));
         return v;
+    }
+
+
+    public void agregarItem(String nombre, String descripcion, String pais, String img) {
+        ParseObject foot = new ParseObject("Food");
+        foot.put("Name", nombre);
+        foot.put("Type", descripcion);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(img);
+        // Convert it to byte
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Compress image to lower quality scale 1 - 100
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] image = stream.toByteArray();
+
+        // Create the ParseFile
+        ParseFile file = new ParseFile("img.png", image);
+        // Upload the image into Parse Cloud
+        file.saveInBackground();
+        foot.put("Image", file);
+        foot.saveInBackground();
     }
 
 }

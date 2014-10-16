@@ -10,8 +10,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import com.parse.Parse;
 
 
 public class AgregarComida extends Activity {
@@ -37,17 +40,15 @@ public class AgregarComida extends Activity {
 
 
     private static int RESULT_LOAD_IMAGE = 1;
-
+    private static String picturePath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_comida);
+    }
 
-        Button buttonLoadImage = (Button) findViewById(R.id.buttonLoadPicture);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
-    @Override
      public void onClick(View arg0) {
 
                 Intent i = new Intent(
@@ -56,8 +57,7 @@ public class AgregarComida extends Activity {
 
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
-        });
-    }
+
 
 
     @Override
@@ -73,10 +73,10 @@ public class AgregarComida extends Activity {
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
+            picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imagen);
+            ImageView imageView = (ImageView) findViewById(R.id.imgProducto);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }
@@ -84,14 +84,38 @@ public class AgregarComida extends Activity {
 
     }
 
+    public void agregarAux(String nombre, String descripcion, String pais){
+
+
+    }
+
     public void agregarComidaParse(View view){
-        Intent intent = new Intent(this, AgregarComida.class);
-        startActivity(intent);
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Desea agregar producto");
+        EditText nombre = (EditText) findViewById(R.id.inpNombre);
+        EditText descripcion = (EditText) findViewById(R.id.inpDescripcion);
+        EditText pais = (EditText) findViewById(R.id.inpPais);
+        String message = nombre.getText().toString()+" - "+descripcion.getText().toString()+" - "+pais.getText().toString();
+        alertDialog.setMessage(message);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //FoodAdapter foodAdapter = new FoodAdapter(this);
+            }
+        });
+        //ImageView imageView = (ImageView) findViewById(R.id.imgProducto);
+        //alertDialog.setIcon(imageView.getDrawable());
+        alertDialog.setIcon(R.drawable.ic_launcher);
+        alertDialog.show();
+        FoodAdapter foodAdapter = new FoodAdapter(this);
+        ImageView imageView = (ImageView) findViewById(R.id.imgProducto);
+        foodAdapter.agregarItem(nombre.getText().toString(),descripcion.getText().toString(),pais.getText().toString(),picturePath);
     }
 
     public void cancelarComida(View view){
-        Intent intent = new Intent(this, MyActivity.class);
+        Intent intent = new Intent(this, VerProductos.class);
         startActivity(intent);
     }
+
+
 
 }
