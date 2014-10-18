@@ -47,12 +47,32 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         return v;
     }
 
+    /**
+    @Override
+    public View getItemViewForItem(ParseObject object, View v, ViewGroup parent) {
+        if (v == null) {
+            v = View.inflate(getContext(), R.layout.fooditem, null);
+        }
+        super.getItemView(object, v, parent);
+        ParseImageView foodImage = (ParseImageView) v.findViewById(R.id.icon);
+        ParseFile imageFile = object.getParseFile("Image");
+        if (imageFile != null) {
+            foodImage.setParseFile(imageFile);
+            foodImage.loadInBackground();
+        }
+        TextView nameTextView = (TextView) v.findViewById(R.id.name);
+        nameTextView.setText(object.getString("Name"));
+        TextView typeView = (TextView) v.findViewById(R.id.type);
+        typeView.setText(object.getString("Type"));
+        return v;
+    }
+    **/
+
 
     public void agregarItem(String nombre, String descripcion, String pais, String img) {
         ParseObject foot = new ParseObject("Food");
         foot.put("Name", nombre);
         foot.put("Type", descripcion);
-
         Bitmap bitmap = BitmapFactory.decodeFile(img);
         // Convert it to byte
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -65,6 +85,13 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         // Upload the image into Parse Cloud
         file.saveInBackground();
         foot.put("Image", file);
+        foot.saveInBackground();
+    }
+
+    public void agregarItem(String nombre, String descripcion, String pais) {
+        ParseObject foot = new ParseObject("Food");
+        foot.put("Name", nombre);
+        foot.put("Type", descripcion);
         foot.saveInBackground();
     }
 

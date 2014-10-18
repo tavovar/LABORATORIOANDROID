@@ -14,7 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/inpNombre"
@@ -23,10 +26,9 @@
         android:inputType="text"
         android:autoText="true"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
-        android:text="@string/nombre" />
+        android:layout_toRightOf="@+id/agregar"
+        android:layout_toEndOf="@+id/agregar" />
 
     <EditText
         android:id="@+id/inpDescripcion"
@@ -34,10 +36,9 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="100dp"
-        android:text="@string/descripcion" />
+        android:layout_alignLeft="@+id/inpNombre"
+        android:layout_alignStart="@+id/inpNombre" />
 
     <EditText
         android:id="@+id/inpPais"
@@ -45,10 +46,9 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="160dp"
-        android:text="@string/pais" />
+        android:layout_alignLeft="@+id/buttonLoadPicture"
+        android:layout_alignStart="@+id/buttonLoadPicture" />
 
     <Button
         android:id="@+id/buttonLoadPicture"
@@ -98,5 +98,35 @@
         android:layout_below="@+id/buttonLoadPicture"
         android:layout_toLeftOf="@+id/cancelar"
         android:layout_toStartOf="@+id/cancelar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/nombre"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/inpNombre"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/descripcion"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/inpDescripcion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/pais"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/buttonLoadPicture"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

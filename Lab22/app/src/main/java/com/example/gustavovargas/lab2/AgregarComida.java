@@ -40,7 +40,7 @@ public class AgregarComida extends Activity {
 
 
     private static int RESULT_LOAD_IMAGE = 1;
-    private static String picturePath;
+    private static String picturePath = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,26 +89,43 @@ public class AgregarComida extends Activity {
 
     }
 
-    public void agregarComidaParse(View view){
+    public void agregarComidaParse(View view) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Desea agregar producto");
         EditText nombre = (EditText) findViewById(R.id.inpNombre);
         EditText descripcion = (EditText) findViewById(R.id.inpDescripcion);
         EditText pais = (EditText) findViewById(R.id.inpPais);
-        String message = nombre.getText().toString()+" - "+descripcion.getText().toString()+" - "+pais.getText().toString();
-        alertDialog.setMessage(message);
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //FoodAdapter foodAdapter = new FoodAdapter(this);
+        if (nombre.length() > 0 && descripcion.length() > 0 && pais.length() > 0) {
+            FoodAdapter foodAdapter = new FoodAdapter(this);
+            String message = nombre.getText().toString() + " - " + descripcion.getText().toString() + " - " + pais.getText().toString();
+            alertDialog.setMessage(message);
+            if(picturePath == "") {
+                alertDialog.setButton("Comida sin imagen", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), pais.getText().toString());
+            }else {
+                alertDialog.setIcon(R.drawable.ic_launcher);
+                alertDialog.show();
+                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), pais.getText().toString(), picturePath);
             }
-        });
-        //ImageView imageView = (ImageView) findViewById(R.id.imgProducto);
-        //alertDialog.setIcon(imageView.getDrawable());
-        alertDialog.setIcon(R.drawable.ic_launcher);
-        alertDialog.show();
-        FoodAdapter foodAdapter = new FoodAdapter(this);
-        ImageView imageView = (ImageView) findViewById(R.id.imgProducto);
-        foodAdapter.agregarItem(nombre.getText().toString(),descripcion.getText().toString(),pais.getText().toString(),picturePath);
+            ((EditText)findViewById(R.id.inpNombre)).setText("");
+            ((EditText) findViewById(R.id.inpDescripcion)).setText("");
+            ((EditText) findViewById(R.id.inpPais)).setText("");
+        }else{
+            alertDialog.setMessage("Datos incompletos");
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((EditText)findViewById(R.id.inpNombre)).setText("");
+                        ((EditText) findViewById(R.id.inpDescripcion)).setText("");
+                        ((EditText) findViewById(R.id.inpPais)).setText("");
+                    }
+                });
+            alertDialog.setIcon(R.drawable.ic_launcher);
+            alertDialog.show();
+        }
     }
 
     public void cancelarComida(View view){
