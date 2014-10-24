@@ -1,1 +1,2 @@
-include ':app', ':Parse-1.7.0'
+include ':app', ':Parse-1.7.0', ':facebook'
+//project(':facebook').projectDir = new File('facebook-android-sdk-3.19.1/facebook')

@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.ListView;
+
 import com.parse.Parse;
 
 
@@ -94,10 +96,10 @@ public class AgregarComida extends Activity {
         alertDialog.setTitle("Desea agregar producto");
         EditText nombre = (EditText) findViewById(R.id.inpNombre);
         EditText descripcion = (EditText) findViewById(R.id.inpDescripcion);
-        EditText pais = (EditText) findViewById(R.id.inpPais);
-        if (nombre.length() > 0 && descripcion.length() > 0 && pais.length() > 0) {
+        ListView pais = (ListView) findViewById(R.id.listPais);
+        if (nombre.length() > 0 && descripcion.length() > 0 && pais.getItemsCanFocus()) {
             FoodAdapter foodAdapter = new FoodAdapter(this);
-            String message = nombre.getText().toString() + " - " + descripcion.getText().toString() + " - " + pais.getText().toString();
+            String message = nombre.getText().toString() + " - " + descripcion.getText().toString();
             alertDialog.setMessage(message);
             if(picturePath == "") {
                 alertDialog.setButton("Comida sin imagen", new DialogInterface.OnClickListener() {
@@ -105,22 +107,27 @@ public class AgregarComida extends Activity {
 
                     }
                 });
-                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), pais.getText().toString());
-            }else {
+                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), "pppp");
                 alertDialog.setIcon(R.drawable.ic_launcher);
                 alertDialog.show();
-                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), pais.getText().toString(), picturePath);
+            }else {
+                foodAdapter.agregarItem(nombre.getText().toString(), descripcion.getText().toString(), "pppp", picturePath);
+                alertDialog.setButton("Comida agregada", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.setIcon(R.drawable.ic_launcher);
+                alertDialog.show();
             }
             ((EditText)findViewById(R.id.inpNombre)).setText("");
             ((EditText) findViewById(R.id.inpDescripcion)).setText("");
-            ((EditText) findViewById(R.id.inpPais)).setText("");
         }else{
             alertDialog.setMessage("Datos incompletos");
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         ((EditText)findViewById(R.id.inpNombre)).setText("");
                         ((EditText) findViewById(R.id.inpDescripcion)).setText("");
-                        ((EditText) findViewById(R.id.inpPais)).setText("");
                     }
                 });
             alertDialog.setIcon(R.drawable.ic_launcher);

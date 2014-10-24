@@ -55,7 +55,8 @@
         android:layout_above="@+id/list"
         android:layout_alignRight="@+id/searchView2"
         android:layout_alignEnd="@+id/searchView2"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:onClick="agregarComida" />
 
 
 </RelativeLayout>

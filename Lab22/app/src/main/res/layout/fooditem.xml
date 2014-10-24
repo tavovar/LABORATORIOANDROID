@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:text="Nombre"
-        android:layout_toStartOf="@+id/type"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/icon"
         android:layout_toEndOf="@+id/icon" />
