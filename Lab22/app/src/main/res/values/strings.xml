@@ -14,5 +14,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="title_activity_ver_productos">VerProductos</string>
     <string name="ingresar">Ingresar</string>
+    <string name="app_id">287643098113118</string>
+    <string name="title_activity_ver_busqueda">verBusqueda</string>
 
 </resources>

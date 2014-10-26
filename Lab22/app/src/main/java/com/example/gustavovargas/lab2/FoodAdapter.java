@@ -5,10 +5,14 @@ import com.parse.*;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import android.view.View;
@@ -19,10 +23,13 @@ import android.view.View;
 
 public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public FoodAdapter(Context context) {
+    public FoodAdapter(Context context, final String busqueda) {
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery create() {
                 ParseQuery query = new ParseQuery("Food");
+                if(busqueda!="") {
+                    query.whereEqualTo("Name", busqueda);
+                }
                 return query;
             }
         });
@@ -44,6 +51,18 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         nameTextView.setText(object.getString("Name"));
         TextView typeView = (TextView) v.findViewById(R.id.type);
         typeView.setText(object.getString("Type"));
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Pais");
+        query.whereEqualTo("nombre", object.getString("pais"));
+        try {
+            List<ParseObject> pais = query.find();
+            ParseImageView foodImage2 = (ParseImageView) v.findViewById(R.id.img_pais);
+            ParseFile imageFile2 = pais.get(0).getParseFile("imagen");
+            foodImage2.setParseFile(imageFile2);
+            foodImage2.loadInBackground();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return v;
     }
 
@@ -85,6 +104,7 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         // Upload the image into Parse Cloud
         file.saveInBackground();
         foot.put("Image", file);
+        foot.put("pais", pais);
         foot.saveInBackground();
     }
 
@@ -92,6 +112,7 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         ParseObject foot = new ParseObject("Food");
         foot.put("Name", nombre);
         foot.put("Type", descripcion);
+        foot.put("pais", pais);
         foot.saveInBackground();
     }
 

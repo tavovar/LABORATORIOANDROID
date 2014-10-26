@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
+
     <com.parse.ParseImageView
         android:id="@+id/icon"
         android:layout_width="100dp"
@@ -32,4 +33,16 @@
         android:layout_toRightOf="@+id/icon"
         android:layout_toEndOf="@+id/icon" />
 
-    !</RelativeLayout>
+
+    <com.parse.ParseImageView
+        android:id="@+id/img_pais"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher"
+        android:layout_toEndOf="@+id/icon"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/icon" />
+
+
+    !
+</RelativeLayout>

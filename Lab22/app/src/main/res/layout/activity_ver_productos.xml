@@ -17,10 +17,9 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:paddingTop="0dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="70dp" />
+        android:layout_below="@+id/button_buscar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="Comidas"
@@ -42,7 +41,7 @@
     <SearchView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView2"
+        android:id="@+id/searchViewComida"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -52,11 +51,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton"
-        android:layout_above="@+id/list"
-        android:layout_alignRight="@+id/searchView2"
-        android:layout_alignEnd="@+id/searchView2"
-        android:src="@drawable/ic_launcher"
-        android:onClick="agregarComida" />
+        android:src="@drawable/com_facebook_tooltip_black_topnub"
+        android:onClick="agregarComida"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/searchViewComida" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:id="@+id/button_buscar"
+        android:layout_below="@+id/searchViewComida"
+        android:layout_centerHorizontal="true"
+        android:onClick="buscarComida" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/lbl_nombre"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/lbl_id"
+        android:layout_below="@+id/lbl_nombre"
+        android:layout_alignLeft="@+id/lbl_nombre"
+        android:layout_alignStart="@+id/lbl_nombre" />
 
 
 </RelativeLayout>
