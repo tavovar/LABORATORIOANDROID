@@ -20,10 +20,6 @@ public class VerProductos extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_productos);
         Parse.initialize(this, "li2vRGdt06sDicvZBY4CoKN8AHX2zy4EWD3WX71b", "LobXBC0YkZo2HTsQ1PmOHoAblXEtpbHk5IJYhceD");
-        FoodAdapter foodAdapter = new FoodAdapter(this,"");
-        ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(foodAdapter);
-        foodAdapter.loadObjects();
         TextView nameTextView = (TextView) findViewById(R.id.lbl_nombre);
         nameTextView.setText(Usuario.getElement().nombre);
         TextView nameTextView1 = (TextView) findViewById(R.id.lbl_id);
@@ -60,6 +56,15 @@ public class VerProductos extends Activity {
     public void buscarComida(View view){
         SearchView nombre = (SearchView) findViewById(R.id.searchViewComida);
         FoodAdapter foodAdapter = new FoodAdapter(this,nombre.getQuery().toString());
+        ListView listView = (ListView) findViewById(R.id.list);
+        listView.setAdapter(foodAdapter);
+        foodAdapter.loadObjects();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        FoodAdapter foodAdapter = new FoodAdapter(this,"");
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(foodAdapter);
         foodAdapter.loadObjects();

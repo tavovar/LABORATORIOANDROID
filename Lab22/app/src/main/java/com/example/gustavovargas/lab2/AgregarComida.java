@@ -168,9 +168,10 @@ public class AgregarComida extends Activity {
     }
 
     public void cancelarComida(View view){
-        Intent intent = new Intent(this, VerProductos.class);
-        startActivity(intent);
+        finish();
     }
+
+
 
 
 
