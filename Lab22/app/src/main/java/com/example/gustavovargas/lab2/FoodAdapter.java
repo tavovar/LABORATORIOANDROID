@@ -21,7 +21,7 @@ import android.view.View;
  * Created by gustavovargas on 06/10/14.
  */
 
-public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
+public class FoodAdapter extends ParseQueryAdapter<ParseObject>{
 
     public FoodAdapter(Context context, final String busqueda) {
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
@@ -36,11 +36,12 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
     }
 
     @Override
-    public View getItemView(ParseObject object, View v, ViewGroup parent) {
+    public View getItemView(ParseObject object,View v, ViewGroup parent) {
         if (v == null) {
             v = View.inflate(getContext(), R.layout.fooditem, null);
         }
         super.getItemView(object, v, parent);
+        final View v2 = v;
         ParseImageView foodImage = (ParseImageView) v.findViewById(R.id.icon);
         ParseFile imageFile = object.getParseFile("Image");
         if (imageFile != null) {
@@ -51,22 +52,17 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         nameTextView.setText(object.getString("Name"));
         TextView typeView = (TextView) v.findViewById(R.id.type);
         typeView.setText(object.getString("Type"));
-
-/**
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Pais");
         query.whereEqualTo("nombre", object.getString("pais"));
-        try {
-            List<ParseObject> pais = query.find();
-            ParseImageView foodImage2 = (ParseImageView) v.findViewById(R.id.img_pais);
-            ParseFile imageFile2 = pais.get(0).getParseFile("imagen");
-            foodImage2.setParseFile(imageFile2);
-            foodImage2.loadInBackground();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-**/
-
-
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject parseObject, ParseException e) {
+                    ParseImageView foodImage2 = (ParseImageView) v2.findViewById(R.id.img_pais);
+                    ParseFile imageFile2 = parseObject.getParseFile("imagen");
+                    foodImage2.setParseFile(imageFile2);
+                    foodImage2.loadInBackground();
+                }
+            });
         return v;
     }
 
@@ -87,7 +83,11 @@ public class FoodAdapter extends ParseQueryAdapter<ParseObject> {
         // Create the ParseFile
         ParseFile file = new ParseFile("img.png", image);
         // Upload the image into Parse Cloud
-        file.saveInBackground();
+        try {
+            file.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         foot.put("Image", file);
         foot.saveInBackground();
     }

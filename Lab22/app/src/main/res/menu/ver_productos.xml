@@ -1,8 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.gustavovargas.lab2.VerProductos" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/agregar"
+        android:title="@string/agregar"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="never"/>
 </menu>

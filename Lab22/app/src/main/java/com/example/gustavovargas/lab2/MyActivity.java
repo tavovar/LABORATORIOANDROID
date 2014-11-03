@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.android.Facebook;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -66,7 +67,7 @@ public class MyActivity extends Activity {
                 if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
-                    Usuario.getElement().nombre = user.getEmail();
+                    Usuario.getElement().nombre = user.toString();
                     Usuario.getElement().id = user.getSessionToken();
                     Intent intent = new Intent(getBaseContext(), VerProductos.class);
                     startActivity(intent);
@@ -74,7 +75,7 @@ public class MyActivity extends Activity {
                 } else {
                     Intent intent = new Intent(getBaseContext(), VerProductos.class);
                     startActivity(intent);
-                    Usuario.getElement().nombre = user.getUsername();
+                    Usuario.getElement().nombre = user.toString();
                     Usuario.getElement().id = user.getSessionToken();
                     Log.d("MyApp", "User logged in through Facebook!");
                 }
