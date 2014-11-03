@@ -67,7 +67,7 @@ public class MyActivity extends Activity {
                 if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
-                    Usuario.getElement().nombre = user.toString();
+                    Usuario.getElement().nombre = user.getUsername();
                     Usuario.getElement().id = user.getSessionToken();
                     Intent intent = new Intent(getBaseContext(), VerProductos.class);
                     startActivity(intent);
@@ -75,7 +75,7 @@ public class MyActivity extends Activity {
                 } else {
                     Intent intent = new Intent(getBaseContext(), VerProductos.class);
                     startActivity(intent);
-                    Usuario.getElement().nombre = user.toString();
+                    Usuario.getElement().nombre = user.getUsername();
                     Usuario.getElement().id = user.getSessionToken();
                     Log.d("MyApp", "User logged in through Facebook!");
                 }
